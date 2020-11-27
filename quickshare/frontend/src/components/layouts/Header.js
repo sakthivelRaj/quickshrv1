@@ -1,64 +1,47 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {logout} from '../../actions/auth'
 
 class Header extends Component {
-  constructor(props) {
-        super(props);
-       
-    }
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
-    const authLinks = (
-      <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-        <span className="navbar-text mr-3">
-          <strong>{user ? `Welcome ${user.username}` : ''}</strong>
-        </span>
-        <li className="nav-item">
-          <button onClick={this.props.logout} className="nav-link btn btn-info btn-sm text-light">
-            Logout
-          </button>
-        </li>
-      </ul>
-    );
-
-    const guestLinks = (
-      <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">Login</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/register" className="nav-link">Register</Link>
-        </li>
-      </ul>
-    );
-
     return (
-      <nav className="navbar navbar-expand-sm navbar-light bg-light">
-        <div className="container">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            
-              <Link to="/" className="navbar-brand">QuickShare</Link>
+      <Fragment>
 
-            
-          </div>
-          {isAuthenticated ? authLinks : guestLinks}
-        </div>
-      </nav>
+      <header className="site-header">
+            <nav className="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+              <div className="container">
+                <a className="navbar-brand mr-4" href="/">QuickShare</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarToggle">
+                  <div className="navbar-nav mr-auto">
+                    <a className="nav-item nav-link" href="#">Home</a>
+                    <a className="nav-item nav-link" href="#">About</a>
+                  </div>
+                  
+                  <div className="navbar-nav">
+                    {isAuthenticated ? 
+                     <>
+                    <Link to={user ? `profile/${user.id}`: ""} className="nav-item nav-link">{user ? `Welcome ${user.username}` : ''}</Link>
+                    <Link to="/logout" onClick={this.props.logout} className="nav-item nav-link" >Logout</Link>
+                    </>
+                      :
+                      <>
+                    <Link to="/login" className="nav-item nav-link">Login</Link>
+                    <Link to="/register" className="nav-item nav-link">Register</Link>
+                      </>
+                    }
+                  </div>
+                </div>
+              </div>
+            </nav>
+      </header>
+      </Fragment>
     );
   }
 }

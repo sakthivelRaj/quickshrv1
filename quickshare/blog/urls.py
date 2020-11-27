@@ -8,7 +8,7 @@ router.register('api/posts', PostAPI, basename='posts')
 
 
 urlpatterns = [
-	path('home/', views.home)
+	path('', views.home)
 ]
 
 urlpatterns += router.urls

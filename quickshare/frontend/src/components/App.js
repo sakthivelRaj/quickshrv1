@@ -6,6 +6,8 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Dashboard from './posts/Dashboard';
 import Login from './accounts/Login'
 import Register from './accounts/Register'
+import PostDetail from './posts/PostDetail'
+import Profile from './profile/Profile'
 
 import { Provider } from 'react-redux';
 import store from '../store';
@@ -28,6 +30,9 @@ class App extends Component {
                   <PrivateRoute exact path="/" component={Dashboard} />                  
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
+                  <Route exact path="/posts/:id" component={PostDetail} />
+                  <Route exact path="/profile/:id" component={Profile} />                  
+
                 </Switch>
 			</div>
 			</Router>

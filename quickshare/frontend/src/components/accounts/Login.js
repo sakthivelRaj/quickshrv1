@@ -27,43 +27,53 @@ export class Login extends Component {
     }
     const { email, password } = this.state;
     return (
-      <div className="col-md-6 m-auto">
-        <div className="card card-body mt-5">
-          <h2 className="text-center">Login</h2>
-          <form onSubmit={this.onSubmit.bind(this)}>
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                className="form-control"
-                name="email"
-                onChange={(e) => this.onChange(e)}
-                value={email}
-              />
-            </div>
+      <div className="offset-md-2 content-section" style={{width:"60%"}}>
 
-            <div className="form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                className="form-control"
-                name="password"
-                onChange={(e) => this.onChange(e)}
-                value={password}
-              />
-            </div>
+        <form onSubmit={this.onSubmit.bind(this)}>
+          
+          <fieldset className="form-group">
+            <legend className="border-bottom mb-4">Log In</legend>
+            
+          </fieldset>
+          <div className="form-group">
+                  <label>Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    onChange={(e) => this.onChange(e)}
+                    value={email}
+                  />
+          </div>
+          <div className="form-group">
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    onChange={(e) => this.onChange(e)}
+                    value={password}
+                  />
+          </div>
 
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary">
-                Login
-              </button>
-            </div>
-            <p>
-              Don't have an account? <Link to="/register">Register</Link>
-            </p>
-          </form>
-        </div>
+          <div className="form-group">
+            <button className="btn btn-outline-info" type="submit"
+            >Login</button>
+            <small className="text-muted ml-2">
+            <a href="#">Forgot password</a>  
+            </small>
+            
+          </div>
+          
+        </form>
+        <div className="border-top pt-3">
+          <small className="text-muted">
+            Need an account? <Link to="/register">Register</Link>
+          </small>
+        </div>  
       </div>
+
+      
     );
   }
 }
@@ -73,3 +83,4 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { login })(Login);
+

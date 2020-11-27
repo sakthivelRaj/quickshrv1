@@ -28,6 +28,7 @@ export const loadUser = () => (dispatch, getState) => {
       });
     })
     .catch((err) => {
+      console.log("loading fail")
       console.log(err.response)
     });
 };
@@ -43,7 +44,7 @@ export const login = (email, password) => (dispatch) => {
 
   // Request Body
   const body = JSON.stringify({ email, password });
-  console.log("****",body)
+  
   axios
     .post('/api/auth/login', body, config)
     .then((res) => {
@@ -70,7 +71,6 @@ export const register = ({ username, firstName, lastName, email, password }) => 
 
   // Request Body
   const body = JSON.stringify({ username:username, first_name:firstName, last_name:lastName, email:email, password:password });
-  console.log("*****",body)
 
   axios
     .post('/api/auth/register', body, config)

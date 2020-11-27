@@ -19,8 +19,6 @@ class PostAPI(viewsets.ModelViewSet):
 	
 	def retrieve(self, request, pk=None):
 		post = get_object_or_404(self.queryset, pk=pk)
-		if(post.author != self.request.user):
-			return Response(status=status.HTTP_403_FORBIDDEN)
 		serializer = PostSerializer(post)
 		return Response(serializer.data)
 

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-import { getPosts, deletePost, addPost } from '../../actions/posts';
+import { getPosts, deletePost, addPost, getPostDetail } from '../../actions/posts';
+import {Link} from 'react-router-dom'
 
 export class Posts extends Component {
 
@@ -10,37 +10,32 @@ export class Posts extends Component {
   }
 
   render() {
-  	console.log(this.props.posts)
-  	console.log(localStorage.getItem('token'))
+    const posts = this.props.posts
+
     return (
       <Fragment>
-        <h2>Posts</h2>
 
         {
-        	this.props.posts.map(post => (
-        		<div key={post.id} className="card text-center mt-2 mb-2">
-				  <div className="card-header">
-				    <ul className="nav nav-pills card-header-pills">
-				      <li className="nav-item">
-				        <a className="nav-link active" href="#">Active</a>
-				      </li>
-				      <li className="nav-item">
-				        <a className="nav-link" href="#">Link</a>
-				      </li>
-				      <li className="nav-item">
-				        <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
-				      </li>
-				    </ul>
-				  </div>
-				  <div className="card-body">
-				    <h5 className="card-title">{post.title}</h5>
-				    <p className="card-text">{post.content}</p>
-				    <a href="#" className="btn btn-primary">Go somewhere</a>
-				  </div>
-				</div>
-                	
-                ))
-        }
+          this.props.posts.map(post => (
+                          
+                <article key={post.id} className="media content-section">
+                  <img className="rounded-circle article-img" src={post.author.profile.image} alt="imggx" />
+                  <div className="media-body">
+                    <div className="article-metadata">
+                      <Link to={`profile/${post.author.id}`} className="mr-2" >{ post.author.username }</Link>
+                      <small className="text-muted mr-2">{post.date_posted.slice(0,10)}</small>
+                    </div>
+                    <h2>
+                    <Link to={`/posts/${post.id}`} className="article-title"> { post.title }</Link>
+                    </h2>
+                    <p className="article-content">{ post.content }</p>
+                  </div>
+                </article>
+           
+
+        ) )
+
+      }
         
       </Fragment>
     );
@@ -51,4 +46,4 @@ const mapStateToProps = (state) => ({
   posts: state.posts.posts
 });
 
-export default connect(mapStateToProps, { getPosts, deletePost, addPost })(Posts);
+export default connect(mapStateToProps, { getPosts, addPost, getPostDetail })(Posts);

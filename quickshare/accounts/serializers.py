@@ -6,7 +6,7 @@ from .models import Profile
 
 # Profile Serializer
 class ProfileSerializer(serializers.ModelSerializer):
-  extra_kwargs = {'image': {'required': False}}
+  extra_kwargs = {'image': {'required': False}}  
 
   class Meta:
     model = Profile 
