@@ -1,0 +1,1 @@
+web: gunicorn quickshrapp.wsgi --log-file -
