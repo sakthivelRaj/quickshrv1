@@ -1,0 +1,1 @@
+web: gunicorn quickshare.wsgi --log-file-
